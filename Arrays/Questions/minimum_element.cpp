@@ -15,17 +15,20 @@ int main()
     }
 
     // int min=arr[0];
-    int min = INT_MAX;                  // in the header file: climits, it gives the lowest possible integer value
+    int mini = INT_MAX;                  // in the header file: climits, it gives the lowest possible integer value
 
     for(int i=0; i<n; i++)
     {
-        if(arr[i]<min)
-        {
-            min=arr[i];
-        }
+        // if(arr[i]<mini)
+        // {
+        //     mini=arr[i];
+        // }
+
+        //* else we can use below function
+        mini = min(mini, arr[i]);
     }
 
-    cout<<min<<endl;
+    cout<<mini<<endl;
 
     return 0;
 }
