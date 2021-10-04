@@ -1,6 +1,9 @@
 #include<iostream>
 using namespace std;
 
+
+//! Time complexity: O(n)
+
 int main()
 {
     cout<<"Number of elements in array"<<endl;
