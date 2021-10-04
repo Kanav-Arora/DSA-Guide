@@ -1,0 +1,1 @@
+Array is contiguous block of memory
