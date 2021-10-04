@@ -1,4 +1,5 @@
 #include<iostream>
+#include<climits>
 using namespace std;
 
 int main()
@@ -13,7 +14,8 @@ int main()
         arr[i] = num;
     }
 
-    int min=arr[0];
+    // int min=arr[0];
+    int min = INT_MAX;                  // in the header file: climits, it gives the lowest possible integer value
 
     for(int i=0; i<n; i++)
     {
