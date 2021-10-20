@@ -1,3 +1,9 @@
+/*
+    Check if given array consists of pair of element whose sum is equal to the number(k) provided 
+    by the user.
+*/
+
+
 #include<iostream>
 #include<algorithm>
 using namespace std;
