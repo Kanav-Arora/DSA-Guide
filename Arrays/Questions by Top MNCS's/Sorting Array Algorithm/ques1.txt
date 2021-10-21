@@ -1,0 +1,76 @@
+A group of students is trying to generate a random sequence of numbers having only odd positive integers. The group decided to start with a sequence of n single digit integers and apply the following procedure to complete the task. 1. ORGANIZE THE GIVEN DIGITS
+Arrange the n digits in an array, say A[0..n-1] such that A[0] = first integer, A[n-1] = second integer, and the third integer gets inserted at the middle index position.
+This divides the array into two parts A[0..middle_index] and A[middle_index..n-1]. Next integer in sequence, i.e. the fourth integer gets inserted at the middle index in the first part. Similarly the fifth integer takes the middle index position in the second part.
+Now the array has four parts. The next four integers in sequence take the respective middle positions in the obtained four parts.
+Repeat this process till all the n integers get inserted in the array A.
+Note: The middle index is computed as lower bound((a+b)/2), where `a` and `b` are starting and ending indices respectively. 2. REMOVE EVEN INTEGERS Execute the following steps in sequence till even integers are present in the array A.
+Scan the array A from the end of 0th index, i.e. from A[0], and identify the first even and the first odd integers. Let the index of an even integer is e and that of an odd integer is o then A[max(o,e)] = A[e] + A[o]. Also delete the integer A[min(o,e)].
+Scan the array A from the end of (n-1)th index, i.e. from A[n-1], and identify the first even and the first odd integers. Let the index of an even integer is e and that of an odd integer is o then A[min(o,e)] = A[e] + A[o]. Also delete the integer A[max(o,e)].
+3. REMOVE NEGATIVE INTEGERS Execute the following steps in sequence till negative integers are present in the array A.
+Scan the array A from the end of 0th index, i.e. from A[0], and identify the first negative and the first positive integers. Let the index of a positive integer is p and that of a negative integer is n then A[max(p,n)] = A[p] + A[n]. Also delete the integer A[min(p,n)].
+Scan the array A from the end of (n-1)th index, i.e. from A[n-1], and identify the first negative and the first positive integers. Let the index of a positive integer is p and that of a negative integer is n then A[min(p,n)] = A[p] + A[n]. Also delete the integer A[max(p,n)].
+4. Repeat Step 2 to remove EVEN integers. Follow the same steps as listed in Step 2. 5. REMOVE DUPLICATES Keep only the last occurrence for any repeating integer.
+
+Implement the above algorithm to generate a sequence of odd positive integers.
+
+Input Format
+- Line 1 contains an integer N, the number of single digit integers to start with. - Line 2 contains N space separated integers. This is a sequence of n single digit integers.
+Output Format
+Line 1 is a space separated sequence of odd positive integers obtained at the end.
+
+Constraints
+All inputs range in between 1 and 1000.
+Sample Input 1 
+9
+1 9 5 3 7 2 4 6 8
+Sample Output 1 
+3 5 23 7
+Explanation
+The contents of array A[0..8] get updated in the following manner:
+ORGANIZE THE GIVEN DIGITS
+1 2 3 4 5 6 7 8 9
+REMOVE EVEN INTEGERS
+After 2(a)
+3 3 4 5 6 7 8 9
+After 2(b)
+3 3 4 5 6 7 17
+After 2(a)
+3 7 5 6 7 17
+After 2(b)
+3 7 5 23 7
+REMOVE NEGATIVE INTEGERS
+3 7 5 23 7
+Repeat Step 2 to remove EVEN integers.
+3 7 5 23 7
+REMOVE DUPLICATES
+3 5 23 7
+Sample Input 2 
+10
+5 8 -2 -1 2 1 9 6 -3 7
+Sample Output 2 
+11 21
+Explanation
+The contents of array A[0..9] get updated in the following manner:
+ORGANIZE THE GIVEN DIGITS
+5 1 -1 9 -2 6 2 -3 7 8
+REMOVE EVEN INTEGERS
+After 2(a)
+1 -1 9 3 6 2 -3 7 8
+After 2(b)
+1 -1 9 3 6 2 -3 15
+After 2(a)
+-1 9 3 7 2 -3 15
+After 2(b)
+-1 9 3 7 17 -3
+REMOVE NEGATIVE INTEGERS
+After 3(a)
+8 3 7 17 -3
+After 3(b)
+8 3 7 14
+Repeat Step 2 to remove EVEN integers.
+After 2(a) executed as part of Step 4
+11 7 14
+After 2(b) executed as part of Step 4
+11 21
+REMOVE DUPLICATES
+11 21
