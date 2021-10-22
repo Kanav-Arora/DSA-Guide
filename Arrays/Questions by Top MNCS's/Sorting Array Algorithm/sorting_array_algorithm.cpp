@@ -81,6 +81,7 @@ void arrange(int arr[],int n, int *final_arr)
 }
 
 // ------------------------------ Remove Even Numbers ------------------------------------
+
 void remove_even(vector<int> &v, int n)
 {
     int first_even = INT_MAX;
@@ -114,7 +115,6 @@ void remove_even(vector<int> &v, int n)
     v[min(last_even,last_odd)] = v[last_even] + v[last_odd];
     v.erase(v.begin() + max(last_even,last_odd));
 }
-
 
 // ------------------------------ Remove Negative Numbers ------------------------------------
 
@@ -153,10 +153,12 @@ void remove_negative(vector<int> &v, int n)
 }
 
 // ------------------------------ Remove Duplicate Numbers ------------------------------------
-// void remove_duplicate(vector<int> &v)
-// {
-//     int count = count(v.begin(), v.end(),)
-// }
+void remove_duplicate(vector<int> &v, int dup)
+{
+    vector< int >::iterator index;
+    index =  find(v.begin(), v.end(), dup);
+    v.erase(index);
+}
 
 int main()
 {
@@ -174,11 +176,7 @@ int main()
     {
         v1.push_back(final_arr[i]);
     }
-    // for(int i=0; i<n; i++)
-    // {
-    //     cout<<v1[i]<<" ";
-    // }
-    // cout<<endl;
+    
     for(int i=0; i<v1.size(); i++)
     {
         if(v1[i]%2==0)
@@ -200,6 +198,28 @@ int main()
             remove_even(v1,n);
         }
     }
+
+    int numbers[1001];
+    for(int i=0; i<1001; i++ )
+    {
+        numbers[i] = INT_MIN;
+    }
+
+    for(int i=0; i<v1.size(); i++)
+    {
+        int count_val = count(v1.begin(), v1.end(), v1[i]);
+        numbers[v1[i]] = count_val;
+    }
+
+    for(int i=0; i<1001; i++)
+    {
+        if(numbers[i]>1)
+        {
+            remove_duplicate(v1,i);
+            numbers[i]--;
+        }
+    }
+
     for(int i=0; i<v1.size(); i++)
     {
         cout<<v1[i]<<" ";
