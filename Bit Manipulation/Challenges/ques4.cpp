@@ -1,5 +1,8 @@
 /*
         Given an array of size n. All elements occur two types except one find that unique element.
+
+        3^3 = 0
+        4^4 = 0
 */
 
 #include<iostream>
