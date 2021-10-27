@@ -32,3 +32,8 @@
 *.app
 Arrays/Questions/minimum_element
 .vscode/settings.json
+.vscode/tasks.json
+
+*
+!*.*
+!*/
