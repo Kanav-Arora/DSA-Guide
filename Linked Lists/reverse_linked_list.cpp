@@ -48,56 +48,34 @@ void InsertAtTail(Node* &head, int val)
     temp->next = n;
 }
 
-void deletion(Node* &head, int val)
+void reverseByIteration(Node* &head)
 {
-    if(head->next==NULL)
-    {
-        delete head;
-        return;
-    }
+    Node* prev = NULL;
+    Node* curr = head;
+    Node* next = head->next;
 
-    else if(head==NULL)
+    while(next!=NULL)
     {
-        return;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+        next = next->next;
     }
-
-    else if(head->data==val)
-    {
-        Node* todelete = head;
-        head = head->next;
-        delete todelete;
-        return;
-    }
-
-    Node* temp = head;
-    while(temp->next->data!=val)
-    {
-        temp=  temp->next;
-    }
-    Node* todelete = temp->next;
-    temp->next = temp->next->next;
-    delete todelete;
+    curr->next = prev;
+    head = curr;
 }
 
-void deletionByIndex(Node* &head, int pos)
+Node* reverseByRecusion(Node* &head)
 {
-    Node* temp = head;
-    if(pos==0)
+    if(head==NULL || head->next==NULL)
     {
-        Node* to_delete = head;
-        head = head->next;
-        delete to_delete;
-        return;
+        return head;
     }
-    int i=0;
-    while(i<pos-1)
-    {
-        temp = temp->next;
-        i++;
-    }
-    Node* to_delete = temp->next;
-    temp->next = temp->next->next;
-    delete to_delete;
+    Node* new_head = reverseByRecusion(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    
+    return new_head;
 }
 
 int main()
@@ -107,7 +85,10 @@ int main()
     InsertAtTail(head,2);
     InsertAtTail(head,3);
     display(head);
-    deletionByIndex(head,0);
+    reverseByIteration(head);
     display(head);
+    Node* new_head = reverseByRecusion(head);
+    display(new_head);
+
     return 0;
 }
