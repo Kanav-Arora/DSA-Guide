@@ -1,0 +1,1 @@
+When a function calls itself again and again until a give condition called Base Case is achieved.
