@@ -23,7 +23,7 @@ int main()
     {
         int mini = INT_MAX;
         int ind = 0;
-        //* for (int i = j+1; i < n; i++)       -   i=j+1 because no need to compare same elements
+        //* for (int i = j; i < n; i++)       -   i=j+1 because no need to compare same elements
         for (int i = j+1; i < n; i++)
         {
             if (arr[i] < arr[j])
