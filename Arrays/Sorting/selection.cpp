@@ -6,6 +6,24 @@ using namespace std;
     * Find minimum element of unsorted array and swap it with the element at begining
 */
 
+
+void selectionSort(int arr[], int n)
+{
+    int min_ind = 0;
+    //* for (int j = 0; j < n-1; j++)           -   j<n-1 because we don't need to check for last element
+    for(int i=0; i<n-1; i++)
+    {
+        min_ind = i;
+        //* for (int i = j; i < n; i++)       -   i=j+1 because no need to compare same elements
+        for(int j=i+1; j<n; j++)
+        {
+            if(arr[min_ind]>arr[j])
+                min_ind = j;
+        }
+        swap(arr[min_ind],arr[i]);
+    }
+}
+
 int main()
 {
     int n;
@@ -17,23 +35,8 @@ int main()
         cin >> num;
         arr[i] = num;
     }
-
-    //* for (int j = 0; j < n-1; j++)           -   j<n-1 because we don't need to check for last element
-    for (int j = 0; j < n-1; j++)
-    {
-        int mini = INT_MAX;
-        int ind = 0;
-        //* for (int i = j; i < n; i++)       -   i=j+1 because no need to compare same elements
-        for (int i = j+1; i < n; i++)
-        {
-            if (arr[i] < arr[j])
-            {
-                int swap = arr[i];
-                arr[i] = arr[j];
-                arr[j] = swap;
-            }
-        }
-    }
+    
+    selectionSort(arr,n);
 
     for (int ele : arr)
     {
