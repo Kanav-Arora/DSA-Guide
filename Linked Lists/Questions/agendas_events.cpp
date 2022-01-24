@@ -379,6 +379,26 @@ int search_Duplicate_Event(Agenda* agenda, string event, int time)
     return 0;
 }
 
+void InsertAtTail(Event* &head, string name, int time)
+{
+    Event *n = new Event(name,time);
+
+    Event* temp = head;
+
+    if(head==NULL)
+    {
+        head =n;
+        return;
+    }
+
+    while(temp->next!=NULL)
+    {
+        temp=temp->next;
+    }
+
+    temp->next = n;
+}
+
 void merge(App* &calendar, string agenda1, string agenda2)
 {
     if(agenda1==agenda2)
@@ -388,23 +408,31 @@ void merge(App* &calendar, string agenda1, string agenda2)
     }
     if((calendar->agenda1->name==agenda1 && calendar->agenda2->name==agenda2) || (calendar->agenda1->name==agenda2 && calendar->agenda2->name==agenda1))
     {
-        Agenda* mergedAgenda = new Agenda(agenda1);
-        Event* ptr = NULL;
-        mergedAgenda->next = ptr;
         Event* ptr1 = calendar->agenda1->next;
         Event* ptr2 = calendar->agenda2->next;
-        while(ptr1->next!=NULL && ptr2->next!=NULL)
+        Event* head = NULL;
+
+        if(ptr1->time<ptr2->time && search_Duplicate_Event(calendar->agenda2, ptr1->name, ptr1->time)<1)
         {
-            if(ptr1->time<ptr2->time && search_Duplicate_Event(calendar->agenda1, ptr1->name, ptr1->time)+search_Duplicate_Event(calendar->agenda2,ptr1->name,ptr1->time)<2)
+            head = calendar->agenda1->next;
+            ptr1 = ptr1->next;
+        }
+        else if(ptr2->time<ptr1->time && search_Duplicate_Event(calendar->agenda1, ptr2->name, ptr2->time)<1)
+        {
+            head = calendar->agenda2->next;
+            ptr2 = ptr2->next;
+        }
+
+        while(ptr1!=NULL && ptr2!=NULL)
+        {
+            if(ptr1->time<ptr2->time && search_Duplicate_Event(calendar->agenda2, ptr1->name, ptr1->time)<1)
             {
-                ptr->next = ptr1;
-                ptr = ptr->next;
+                add(calendar,agenda1,ptr1->name,ptr1->time);
                 ptr1 = ptr1->next;
             }
-            else if(ptr2->time<ptr1->time && search_Duplicate_Event(calendar->agenda1, ptr2->name, ptr2->time)+search_Duplicate_Event(calendar->agenda2,ptr2->name,ptr2->time)<2)
+            else if(ptr2->time<ptr1->time && search_Duplicate_Event(calendar->agenda1, ptr2->name, ptr2->time)<1)
             {
-                ptr->next = ptr2;
-                ptr = ptr->next;
+                add(calendar,agenda1,ptr2->name,ptr2->time);
                 ptr2 = ptr2->next;
             }
             else
@@ -413,7 +441,30 @@ void merge(App* &calendar, string agenda1, string agenda2)
                 return;
             }
         }
-        calendar->agenda1 = mergedAgenda;
+
+        while(ptr1!=NULL)
+        {
+            if(search_Duplicate_Event(calendar->agenda2, ptr1->name, ptr1->time)==1)
+            {
+                cout<<"ERROR: Cannot merge: Conflict found"<<endl;
+                return;
+            }
+            InsertAtTail(head,ptr1->name, ptr1->time);
+            ptr1 = ptr1->next;
+        }
+
+        while(ptr2!=NULL)
+        {
+            if(search_Duplicate_Event(calendar->agenda1, ptr2->name, ptr2->time)==1)
+            {
+                cout<<"ERROR: Cannot merge: Conflict found"<<endl;
+                return;
+            }
+            InsertAtTail(head,ptr1->name, ptr1->time);
+            ptr2 = ptr2->next;
+        }
+
+        calendar->agenda1->next = head;
         calendar->agenda2 = NULL;
     }
     else
@@ -434,7 +485,6 @@ int main()
     display(calendar,"others");
     swap(calendar,"others","coffee","milk");
     display(calendar,"others");
-    // cout<<search_Duplicate_Event(calendar->agenda2,"coffee",5);
     merge(calendar,"Agenda","others");
     display(calendar,"Agenda");
     return 0;

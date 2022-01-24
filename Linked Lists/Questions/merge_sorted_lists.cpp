@@ -37,8 +37,6 @@ void InsertAtTail(Node* &head, int val)
     }
 
     temp->next = n;
-
-
 }
 
 void display(Node* head)
