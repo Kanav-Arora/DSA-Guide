@@ -1,13 +1,5 @@
 {
     "files.associations": {
-        "iostream": "cpp",
-        "iosfwd": "cpp"
-    },
-    "C_Cpp.errorSquiggles": "Enabled",
-    "dendron.rootDir": ".",
-    "pasteImage.path": "${currentFileDir}/assets/images",
-    "pasteImage.prefix": "/",
-    "editor.suggest.snippetsPreventQuickSuggestions": false,
-    "editor.suggest.showSnippets": true,
-    "editor.tabCompletion": "on"
+        "iostream": "cpp"
+    }
 }

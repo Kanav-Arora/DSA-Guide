@@ -40,3 +40,6 @@ try.cpp
 !*.*
 !*/
 try.cpp
+
+.vscode/
+.DS_Store
