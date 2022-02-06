@@ -10,11 +10,11 @@ using namespace std;
 void selectionSort(int arr[], int n)
 {
     int min_ind = 0;
-    //* for (int j = 0; j < n-1; j++)           -   j<n-1 because we don't need to check for last element
+    //* for (int i = 0; i < n; i++)           -   i<n-1 because we don't need to check for last element
     for(int i=0; i<n-1; i++)
     {
         min_ind = i;
-        //* for (int i = j; i < n; i++)       -   i=j+1 because no need to compare same elements
+        //* for (int j = i; j < n; j++)       -   j=i+1 because no need to compare same elements
         for(int j=i+1; j<n; j++)
         {
             if(arr[min_ind]>arr[j])
