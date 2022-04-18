@@ -29,7 +29,7 @@ void quickSort(int arr[], int l, int r)
 
 int main()
 {
-    int arr[] = {2,3,1,4,5};
+    int arr[] = {2,3,1,5,4};
     quickSort(arr,0,4);
     for(int i=0; i<5; i++)
     {
