@@ -4,7 +4,7 @@ using namespace std;
 int partition(int arr[], int l, int r)
 {
     int pivot = arr[r];
-    int i = l-1;
+    int i = l-1;                // last number less than PIVOT
     for(int j=l; j<r; j++)
     {
         if(arr[j]<pivot)
@@ -16,7 +16,7 @@ int partition(int arr[], int l, int r)
     swap(arr[i+1],arr[r]);
     return i+1;
 }
-
+ 
 void quickSort(int arr[], int l, int r)
 {
     if(l<r)
