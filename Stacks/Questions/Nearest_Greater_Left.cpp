@@ -4,49 +4,56 @@
 #include<vector>
 using namespace std;
 
+void display(vector<int> v)
+{
+    for(auto a:v)
+    {
+        cout<<a<<" ";
+    }
+    cout<<endl;
+}
 
-vector<int> NearestGreaterRight(int arr[], int n)
+vector<int> NearestGreaterLeft(int arr[], int n)
 {
     stack<int> s;
     vector<int> res;
-    for(int i=n-1; i>-1; i--)
+
+    for(int i=0; i<n; i++)
     {
         if(s.empty()==1)
         {
             res.push_back(-1);
-            s.push(arr[i]);
-        }
-        else
-        {   
-            if(s.top()>arr[i])
-            {
-                res.push_back(s.top());
-                s.push(arr[i]);
-                continue;
-            }
 
-            else
-            {
-                while(s.top()<=arr[i] && s.empty()==0)
+            display(res);
+        }
+
+        else if(!s.empty() && s.top()>arr[i])
+        {
+            res.push_back(s.top());
+
+            display(res);
+        } 
+
+        else if(!s.empty() && s.top()<=arr[i])
+        {
+                while(s.top()<=arr[i] && !s.empty())
                     s.pop();
                 
                 if(s.empty()==1)
                 {
                     res.push_back(-1);
-                    s.push(arr[i]);
+
+                    display(res);
                 }
 
                 else if(s.top()>arr[i])
                 {
                     res.push_back(s.top());
-                    s.push(arr[i]);
-                    continue;
-                }
-            }
+                    display(res);
+                }   
         }
+        s.push(arr[i]);
     }
-
-    reverse(res.begin(), res.end());
 
     return res;
 }
@@ -55,7 +62,7 @@ int main()
 {
     int arr[] = {1,3,2,4};
     vector<int> v;
-    v = NearestGreaterRight(arr,4);
+    v = NearestGreaterLeft(arr,4);
 
     for(auto a : v)
         cout<<a<<" ";
