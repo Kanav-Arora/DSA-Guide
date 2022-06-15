@@ -20,36 +20,29 @@ vector<int> NearestGreaterLeft(int arr[], int n)
 
     for(int i=0; i<n; i++)
     {
-        if(s.empty()==1)
+        if(s.size()==0)
         {
             res.push_back(-1);
-
-            display(res);
         }
 
-        else if(!s.empty() && s.top()>arr[i])
+        else if(s.top()>arr[i])
         {
             res.push_back(s.top());
-
-            display(res);
         } 
 
-        else if(!s.empty() && s.top()<=arr[i])
+        else
         {
-                while(s.top()<=arr[i] && !s.empty())
+                while(s.size()!=0 && s.top()<=arr[i])
                     s.pop();
                 
-                if(s.empty()==1)
+                if(s.size()==0)
                 {
                     res.push_back(-1);
-
-                    display(res);
                 }
 
                 else if(s.top()>arr[i])
                 {
                     res.push_back(s.top());
-                    display(res);
                 }   
         }
         s.push(arr[i]);

@@ -19,21 +19,14 @@ vector<int> StockSpan(int arr[], int n)
         
         else
         {
+            while(!s.empty() && s.top().first<=arr[i])
+            {
+                s.pop();
+            }
             if(s.empty())
                 v.push_back(i);
-
             else
-            {
-                while(!s.empty() && s.top().first<=arr[i])
-                {
-                    s.pop();
-                }
-                if(s.empty())
-                    v.push_back(i);
-                else
-                    v.push_back(i-s.top().second);   
-
-            }
+                v.push_back(i-s.top().second);   
         }
         s.push({arr[i],i});
     }
