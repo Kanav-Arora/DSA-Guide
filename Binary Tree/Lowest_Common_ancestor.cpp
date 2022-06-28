@@ -77,6 +77,30 @@ int LCA(Node* root, int n1, int n2)
     return -1;
 }
 
+
+Node* LCA2(Node* root, int n1, int n2)
+{
+
+    if(root==NULL)
+         return NULL;
+
+    if(root->data==n1 || root->data==n2)
+        return root;
+    
+    Node* leftlca = LCA2(root->left, n1, n2);
+    Node* rightlca = LCA2(root->right, n1, n2);
+
+    if(leftlca!=NULL && rightlca!=NULL)
+        return root;
+    
+    if(leftlca==NULL)
+        return rightlca;
+
+    if(rightlca==NULL)
+        return leftlca;
+
+}
+
 int main()
 {
     Node* root = new Node(1);
@@ -88,6 +112,6 @@ int main()
     root->right->right = new Node(6);
 
 
-    cout<<LCA(root, 5, 6);
+    cout<<LCA2(root, 5, 6)->data;
     return 0;
 }
