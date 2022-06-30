@@ -58,6 +58,29 @@ bool BalancedHeight(Node* root)
 
 }
 
+pair<bool, int> BalancedHeightModified(Node* root)
+{
+    if(root==NULL)
+        return {true,0};
+    
+    pair<bool, int> left = BalancedHeightModified(root->left);
+    pair<bool, int> right = BalancedHeightModified(root->right);
+
+    int lh = left.second;
+    int rh = right.second;
+
+    int diff = abs(lh-rh);
+
+    int height = max(lh,rh) + 1;
+
+    if(left.first && right.first && diff<=1) 
+    {
+        return {true,height};
+    }
+
+    return {false,height};
+}
+
 int main()
 {
     Node* root = new Node(1);
@@ -66,6 +89,6 @@ int main()
     root->left->left = new Node(4);
     root->left->left->left = new Node(5);
 
-    cout<<BalancedHeight(root)<<endl;
+    cout<<BalancedHeightModified(root).first<<endl;
     return 0;
 }
