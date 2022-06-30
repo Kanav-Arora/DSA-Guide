@@ -78,6 +78,24 @@ int modifiedDiameterBT(Node* root, int* height)
 
 }
 
+pair<int,int> modifiedBT2(Node* root)
+{
+    if(root==NULL)
+    {
+        return {0,0};
+    }
+
+    pair<int,int> leftdia = modifiedBT2(root->left);
+    pair<int,int> rightdia = modifiedBT2(root->right);
+
+    int op1 = leftdia.first;
+    int op2 = rightdia.first;
+
+    int op3 = leftdia.second + rightdia.second + 1;
+
+    return {max(op1, max(op2,op3)), max(leftdia.second,rightdia.second)+1};
+}
+
 int main()
 {
     Node* root = new Node(1);
