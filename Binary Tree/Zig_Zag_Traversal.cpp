@@ -1,4 +1,5 @@
 #include<iostream>
+#include<vector>
 #include<queue>
 using namespace std;
 
@@ -33,66 +34,59 @@ void printBT(const Node* node)
     printBT("", node, false);
 }
 
-int RightViewUsingQueue(Node* root)
+vector<int> ZigZag(Node* root)
 {
+    vector<int> ans;
+
+    if(root==NULL)
+        return ans;
+
     queue<Node*> q;
     q.push(root);
 
+    bool leftToRight = true;
+
     while(!q.empty())
     {
-        int n = q.size();
-        for(int i =0; i<n; i++)
+        int size = q.size();
+
+        vector<int> temp(size);
+
+        for(int i=0; i<size; i++)
         {
-            Node* curr = q.front();
+            Node* frontnode = q.front();
             q.pop();
 
-            if(i==n-1)
-                cout<<curr->data<<" ";
+            int index  = leftToRight ? i : size-i-1;
+
+            temp[index] = frontnode->data;
+
+            if(frontnode->left)
+                q.push(frontnode->left);
             
+            if(frontnode->right)
+                q.push(frontnode->right);
 
-            if(curr->left!=NULL)
-                q.push(curr->left);
-
-            if(curr->right!=NULL)
-                q.push(curr->right);
         }
+
+        leftToRight = !leftToRight;
+
+        for(auto i: temp)
+            ans.push_back(i);
     }
-}
 
-void RightViewRecursion(Node* root, vector<int> &ans, int level)
-{
-    if(root==NULL)
-        return;
-
-    if(level==ans.size())
-        ans.push_back(root->data);
-
-    if(root->right)
-        RightViewRecursion(root->right, ans, level+1);
-    
-    if(root->left)
-        RightViewRecursion(root->left, ans, level+1);
-    
+    return ans;
 }
 
 int main()
 {
     Node* root = new Node(1);
     root->left = new Node(2);
-    root->left->left = new Node(4);
     root->right = new Node(3);
-    root->right->left = new Node(5);
-    root->right->left->left = new Node(7);
-    root->right->right = new Node(6);
 
-    RightViewUsingQueue(root);
-    cout<<endl;
+    vector<int> ans = ZigZag(root);
 
-    vector<int> ans;
-    RightViewRecursion(root, ans, 0);
-
-    for(auto i: ans)
+    for(auto i : ans)
         cout<<i<<" ";
-    cout<<endl;
     return 0;
 }

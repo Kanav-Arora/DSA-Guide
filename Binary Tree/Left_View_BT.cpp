@@ -1,5 +1,6 @@
 #include<iostream>
 #include<queue>
+#include<vector>
 using namespace std;
 
 class Node{
@@ -31,6 +32,21 @@ void printBT(const std::string& prefix, const Node* node, bool isLeft)
 void printBT(const Node* node)
 {
     printBT("", node, false);
+}
+
+void LeftViewRecursion(Node* root, vector<int> &ans, int level)
+{
+    if(root==NULL)
+        return;
+
+    if(level==ans.size())
+        ans.push_back(root->data);
+
+    if(root->left)
+        LeftViewRecursion(root->left, ans, level+1);
+    
+    if(root->right)
+        LeftViewRecursion(root->right, ans, level+1);
 }
 
 void LeftView(Node* root)
@@ -76,5 +92,14 @@ int main()
     root->right->right = new Node(6);
 
     LeftView(root);
+
+    cout<<endl;
+
+    vector<int> ans;
+    LeftViewRecursion(root,ans, 0);
+
+    for(auto i: ans)
+        cout<<i<<" ";
+    
     return 0;
 }
