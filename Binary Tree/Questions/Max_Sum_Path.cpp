@@ -33,47 +33,49 @@ void printBT(const Node* node)
     printBT("", node, false);
 }
 
-void solve(Node* root, int sum, int &maxSum, int length, int &maxLenght)
+int solve(Node* root, int &ans)
 {
     if(root==NULL)
     {
-        if(length>maxLenght)
-        {
-            maxLenght = length;
-            maxSum = sum;
-        }
-
-        else if(maxLenght==length)
-        {
-            maxSum = max(sum, maxSum);
-        }
-
-        return;
+        return 0;
     }
 
-    sum+= root->data;
-    solve(root->left, sum, maxSum, length+1, maxLenght);
-    solve(root->right,sum, maxSum, length+1, maxLenght);
+    if(root->right==NULL && root->left==NULL)       // leaf node
+    {
+        ans = max(ans, root->data);
+        return root->data;
+    }
+
+    int leftans = solve(root->left, ans);
+    int rightans = solve(root->right, ans);
+
+    int nodemax = max(max(root->data, root->data+leftans+rightans), 
+                    max(root->data+leftans, root->data+rightans));
+    
+    ans = max(ans, nodemax);
+
+    int singlePathSum = max(root->data, max(root->data+leftans, root->data+rightans));
+
+    return singlePathSum;
+
 }
 
-int MaxPathSum(Node* root)
+int MaxSumPath(Node* root)
 {
-    int sum = 0;
-    int maxSum = INT_MIN;
-    int length = 0;
-    int maxLenght = 0;
-
-    solve(root, sum, maxSum, length, maxLenght);
-
-    return maxSum;
+    int ans = INT_MIN;
+    solve(root, ans);
+    return ans;
 }
-
-
 
 int main()
 {
     Node* root = new Node(1);
     root->left = new Node(2);
+    root->left->left = new Node(4);
     root->right = new Node(3);
+    root->right->right = new Node(5);
+    // root->right->right = new Node(-6);
+
+    cout<<MaxSumPath(root)<<endl;
     return 0;
 }
