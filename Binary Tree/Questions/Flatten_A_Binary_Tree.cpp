@@ -32,15 +32,62 @@ void printBT(const Node* node)
     printBT("", node, false);
 }
 
-void Flatten()
+void leftAndRight(Node* &root)
 {
+    if(root==NULL)
+        return;
     
+    if(root->left==NULL && root->right==NULL)
+        return;
+
+    leftAndRight(root->left);
+    leftAndRight(root->right);
+
+    Node* temp = root->right;
+    root->right = root->left;
+    root->left = NULL;
+    root->right->right = temp;
+}
+
+void Flatten(Node* root)
+{
+    // step 1 -> recursively flatten left and right subtree
+
+    leftAndRight(root->left);
+    leftAndRight(root->right);
+
+    //step 2 -> store left tail and right tail
+
+    Node* lefttail = root->left;
+    Node* righttail = root->right;
+
+    while(lefttail->right!=NULL)
+        lefttail = lefttail->right;
+
+    while(righttail->right!=NULL)
+        righttail = righttail->right;
+
+    Node* temp  = root->right;
+
+    root->right = root->left;
+    root->left = NULL;
+
+    lefttail->right = temp;
+
+    printBT(root);
 }
 
 int main()
 {
     Node* root = new Node(1);
     root->left = new Node(2);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
     root->right = new Node(3);
+    root->right->left = new Node(6);
+    root->right->right = new Node(7);
+
+    Flatten(root);
+
     return 0;
 }
