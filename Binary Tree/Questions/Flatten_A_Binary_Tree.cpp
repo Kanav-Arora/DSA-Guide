@@ -77,6 +77,28 @@ void Flatten(Node* root)
     printBT(root);
 }
 
+// Using Morris Law
+
+void FlattenUsingMorris(Node* root)
+{
+    Node* curr = root;
+
+    while(curr)
+    {
+        if(curr->left)
+        {
+            Node* pred = curr->left;
+            while(pred->right)
+                pred = pred->right;
+
+            pred->right = curr->right;
+            curr->right = curr->left;
+            curr->left = NULL;
+        }
+        curr = curr->right;
+    }
+}
+
 int main()
 {
     Node* root = new Node(1);
@@ -87,7 +109,9 @@ int main()
     root->right->left = new Node(6);
     root->right->right = new Node(7);
 
-    Flatten(root);
+    printBT(root);
+    FlattenUsingMorris(root);
+    printBT(root);
 
     return 0;
 }
