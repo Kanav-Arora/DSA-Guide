@@ -99,13 +99,59 @@ int KthSmallest(Node* root, int &i, int k)
     return -1;
 }
 
+int Morris(Node* root, int k)
+{
+    int i = 0;
+
+    Node* curr = root;
+
+    while(curr)
+    {
+        if(!curr->left)
+        {
+            i++;
+            if(i==k)
+                    return curr->data;
+            curr = curr->right;
+        }
+
+        else
+        {
+            Node* temp = curr->left;
+
+            while(temp->right && temp->right!=curr)
+                temp = temp->right;
+
+            if(temp->right==NULL)
+            {
+                temp->right = curr;
+                curr = curr->left;
+            }
+
+            if(temp->right==curr)
+            {
+                temp->right = NULL;
+                i++;
+                if(i==k)
+                    return curr->data;
+                curr = curr->right;
+            }
+        }
+
+    }
+
+    return -1;
+
+}
+
 int main()
 {
     Node* root = NULL;
     input(root);
     // 10 7 15 5 9 17 16 19 -1
 
-    int i =0;
-    cout<<KthSmallest(root,i,3)<<endl;
+    cout<<root->data<<endl;
+
+    cout<<Morris(root,3)<<endl;
     return 0;
 }
