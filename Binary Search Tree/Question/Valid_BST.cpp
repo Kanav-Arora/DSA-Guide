@@ -113,7 +113,7 @@ bool ValidBST_2(Node* root, pair<int,int> p = {INT32_MIN,INT32_MAX})
     if(root==NULL)
         return true;
 
-    if(root->data>p.first && root->data<p.second)
+    if(root->data>=p.first && root->data<=p.second)
     {
         bool lt = ValidBST_2(root->left,{p.first,root->data});
         bool rt = ValidBST_2(root->right,{root->data, p.second});
