@@ -35,6 +35,8 @@ void printBT(const Node* node)
 
 /*
     Binary Tree is symmetrical if it is a mirror image
+
+    Leetcode: 101.
 */
 
 //iterative solution
