@@ -1,21 +1,22 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-class Node{
-    public: 
-        int data;
-        Node* left;
-        Node* right;
+class Node
+{
+public:
+    int data;
+    Node *left;
+    Node *right;
 
-        Node(int val)
-        {
-            data = val;
-            left = NULL;
-            right = NULL;
-        }
+    Node(int val)
+    {
+        data = val;
+        left = NULL;
+        right = NULL;
+    }
 };
 
-void printBT(const std::string& prefix, const Node* node, bool isLeft)
+void printBT(const std::string &prefix, const Node *node, bool isLeft)
 {
     if (node != nullptr)
     {
@@ -27,47 +28,47 @@ void printBT(const std::string& prefix, const Node* node, bool isLeft)
     }
 }
 
-void printBT(const Node* node)
+void printBT(const Node *node)
 {
     printBT("", node, false);
 }
 
-void leftAndRight(Node* &root)
+void leftAndRight(Node *&root)
 {
-    if(root==NULL)
+    if (root == NULL)
         return;
-    
-    if(root->left==NULL && root->right==NULL)
+
+    if (root->left == NULL && root->right == NULL)
         return;
 
     leftAndRight(root->left);
     leftAndRight(root->right);
 
-    Node* temp = root->right;
+    Node *temp = root->right;
     root->right = root->left;
     root->left = NULL;
     root->right->right = temp;
 }
 
-void Flatten(Node* root)
+void Flatten(Node *root)
 {
     // step 1 -> recursively flatten left and right subtree
 
     leftAndRight(root->left);
     leftAndRight(root->right);
 
-    //step 2 -> store left tail and right tail
+    // step 2 -> store left tail and right tail
 
-    Node* lefttail = root->left;
-    Node* righttail = root->right;
+    Node *lefttail = root->left;
+    Node *righttail = root->right;
 
-    while(lefttail->right!=NULL)
+    while (lefttail->right != NULL)
         lefttail = lefttail->right;
 
-    while(righttail->right!=NULL)
+    while (righttail->right != NULL)
         righttail = righttail->right;
 
-    Node* temp  = root->right;
+    Node *temp = root->right;
 
     root->right = root->left;
     root->left = NULL;
@@ -77,18 +78,39 @@ void Flatten(Node* root)
     printBT(root);
 }
 
+// Above solution merged into one
+
+void flatten(Node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    flatten(root->left);
+    flatten(root->right);
+    if (root->left)
+    {
+        Node *right = root->right;
+        root->right = root->left;
+        root->left = NULL;
+        while (root->right)
+            root = root->right;
+        root->right = right;
+    }
+}
+
 // Using Morris Law
 
-void FlattenUsingMorris(Node* root)
+void FlattenUsingMorris(Node *root)
 {
-    Node* curr = root;
+    Node *curr = root;
 
-    while(curr)
+    while (curr)
     {
-        if(curr->left)
+        if (curr->left)
         {
-            Node* pred = curr->left;
-            while(pred->right)
+            Node *pred = curr->left;
+            while (pred->right)
                 pred = pred->right;
 
             pred->right = curr->right;
@@ -99,9 +121,11 @@ void FlattenUsingMorris(Node* root)
     }
 }
 
+// Using Reverse Preorder
+
 int main()
 {
-    Node* root = new Node(1);
+    Node *root = new Node(1);
     root->left = new Node(2);
     root->left->left = new Node(4);
     root->left->right = new Node(5);
