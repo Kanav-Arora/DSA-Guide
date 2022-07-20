@@ -172,6 +172,134 @@ Node* Merge1(Node* root1, Node* root2)
     return vectorToBST(v, 0, v.size()-1);
 }
 
+// Approach 2
+
+void ConvertIntoLL(Node* root, Node* &prev)
+{
+    if(root==NULL)
+        return;
+
+    ConvertIntoLL(root->left, prev);
+    prev->left = NULL;
+    prev->right = root;
+    prev = root;
+    ConvertIntoLL(root->right, prev);
+}
+
+Node* MergeLL(Node* root1, Node* root2)
+{
+    Node* head = NULL;
+    Node* tail = NULL;
+
+    while(root1!=NULL && root2!=NULL)
+    {
+        if(root1->data<root2->data)
+        {
+            if(head==NULL)
+            {
+                head= root1;
+                tail = root1;
+                root1 = root1->right;
+            }
+            else
+            {
+                tail->right = root1;
+                tail = root1;
+                root1 = root1->right;
+            }
+        }
+        else
+        {
+            if(head==NULL)
+            {
+                head = root2;
+                tail = root2;
+                root2 = root2->right;
+            }
+            else
+            {
+                tail->right = root2;
+                tail = root2;
+                root2 = root2->right;
+            }
+        }
+    }
+
+    while(root1!=NULL)
+    {
+        tail->right = root1;
+        tail = root1;
+        root1 = root1->right;
+    }
+
+    while(root2!=NULL)
+    {
+        tail->right = root2;
+        tail = root2;
+        root2 = root2->right;        
+    }
+
+    return head;
+}
+
+int CountNodes(Node* root)
+{
+    int cnt = 0;
+    Node* temp = root;
+    
+    while(temp!=NULL)
+    {
+        cnt++;
+        temp = temp->right;
+    }
+
+    return cnt;
+}
+
+Node* LLToBST(Node* head, int n)
+{
+    if(n<=0 || head==NULL)
+        return NULL;
+
+    Node* lt = LLToBST(head, n/2);
+    Node* root = head;
+    root->left = lt;
+    head = head->right;
+    root->right = LLToBST(head, n/2-1);
+
+    return root;
+}
+
+Node* Merge2(Node* root1, Node* root2)
+{
+    Node* dummy1 = new Node(-1);
+    Node* dummy2 = new Node(-1);
+
+    Node* prev = dummy1;
+    ConvertIntoLL(root1, prev);
+
+    prev = dummy2;
+    ConvertIntoLL(root2, prev);
+
+    root1 = dummy1->right;
+    root2 = dummy2->right;
+    delete dummy1;
+    delete dummy2;
+
+    Node* mergedLL = MergeLL(root1, root2);
+
+    while(mergedLL!=NULL)
+    {
+        cout<<mergedLL->data<<" ";
+        mergedLL = mergedLL->right;
+    }
+    cout<<endl;
+
+    return root1;
+
+    // return LLToBST(mergedLL, CountNodes(mergedLL));
+}
+
 int main()
 {
     Node* root1 = new Node(15);
@@ -195,9 +323,9 @@ int main()
 
     printBT(root2);
 
-    Node* root = Merge1(root1, root2);
+    Node* root = Merge2(root1, root2);
 
-    printBT(root);
+    // printBT(root);
 
     return 0;
 }
