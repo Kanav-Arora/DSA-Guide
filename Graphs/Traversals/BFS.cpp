@@ -3,83 +3,29 @@
 #include<queue>
 using namespace std;
 
-class Node{
-    public:
-        int data;
-        Node* next;
-        Node(int val)
+vector<int> BFS(vector<int> adjL[], int start, int vertices)
+{
+        queue<int> q;
+        q.push(start);
+        vector<int> visited(vertices,0);
+        visited[start] = 1;
+        vector<int> order;
+        while(!q.empty())
         {
-            data = val;
-            next = NULL;
-        }
-};
-
-
-void InsertAtTail(Node* &head, int val)
-{
-    Node *n = new Node(val);
-    Node* temp = head;
-    if(head==NULL)
-    {
-        head =n;
-        return;
-    }
-    while(temp->next!=NULL)
-    {
-        temp=temp->next;
-    }
-    temp->next = n;
-}
-
-void display(Node* head)
-{
-    if(head==NULL)
-    {
-        cout<<"Empty linked list";
-    }
-    Node* temp = head;
-    while(temp!=NULL)
-    {
-        cout<<temp->data<<" ";
-        temp= temp->next;
-    }
-    cout<<endl;
-}
-
-vector<int> BFS(vector<Node*> vertices, int start)
-{
-    queue<int> q;
-    vector<int> visited(vertices.size()+1,0);
-
-    q.push(start);
-    visited[start] = 1;
-
-    vector<int> order;
-
-    while(!q.empty())
-    {
-        int size = q.size();
-
-        for(int i=0;i<size; i++)
-        {
-            int front = q.front();
-            q.pop();
-            order.push_back(front);
-            Node* temp = vertices[front]->next;
-
-            while(temp!=NULL)
-            {
-                if(visited[temp->data]==0)
+                int front = q.front();
+                q.pop();
+                order.push_back(front);
+                for(auto i:adjL[front])
                 {
-                    visited[temp->data] = 1;
-                    q.push(temp->data);
+                    if(visited[i]==0)
+                    {
+                        visited[i]=1;
+                        q.push(i);
+                    }
                 }
-                temp = temp->next;
-            }
         }
-    }
 
-    return order;
+        return order;
 }
 
 int main()
@@ -88,41 +34,29 @@ int main()
     cin>>vertices; 
     int edges;
     cin>>edges;
-    vector<Node*> v(vertices+1, NULL);
+    vector<int> v[vertices+1];
     int v1,v2;
     while(edges--)
     {
         cin>>v1>>v2;
-        if(v[v1]==NULL)
-        {
-            v[v1] = new Node(v1);
-            InsertAtTail(v[v1],v2);
-        }
-        else
-            InsertAtTail(v[v1],v2);
+        v[v1].push_back(v2);
     }
 
     cout<<endl<<"Graph Adjacency List created..."<<endl;
 
     for(int i=1; i<=vertices; i++)
     {
-        cout<<"[ "<<v[i]->data<<" ]";
+        cout<<"[ "<<i<<" ]";
 
-        Node* temp = v[i]->next;
-        while(temp!=NULL)
+        for(int j=0; j<v[i].size(); j++)
         {
-            cout<<" -> "<<temp->data;
-            temp = temp->next;
+            cout<<" -> "<<v[i][j];
         }
 
         cout<<endl;
-
     }
 
-    cout<<endl;
-
-
-    vector<int> order = BFS(v,6);
+    vector<int> order = BFS(v,6, vertices);
 
     for(int i : order)
         cout<<i<<" ";
