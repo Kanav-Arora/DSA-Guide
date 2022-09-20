@@ -41,7 +41,7 @@ vector<vector<int>> nearest(vector<vector<int>> mat)
             int nrow = row + delrow[i];
             int ncol = col + delcol[i];
 
-            if (nrow >= 0 && nrow < m && ncol >= 0 && ncol <= n && visited[nrow][ncol] == 0)
+            if (nrow >= 0 && nrow < m && ncol >= 0 && ncol < n && visited[nrow][ncol] == 0)
             {
                 visited[nrow][ncol] = 1;
                 q.push({{nrow, ncol}, step + 1});
