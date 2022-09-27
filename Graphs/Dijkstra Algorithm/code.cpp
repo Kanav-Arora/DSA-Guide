@@ -10,7 +10,7 @@ using namespace std;
 
 vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int source)
 {
-    unordered_map<int, list<pair<int, int>>> mp;
+    unordered_map<int, list<pair<int, int>>> mp;        // adjacency list
 
     for (int i = 0; i < vec.size(); i++)
     {
