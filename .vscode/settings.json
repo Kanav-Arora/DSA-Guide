@@ -83,7 +83,8 @@
         "stop_token": "cpp",
         "set": "cpp",
         "unordered_set": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "regex": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }
