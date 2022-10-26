@@ -32,6 +32,7 @@ vector<vector<string>> findSequences(string beginWord, string endWord, vector<st
             {
                 words.erase(it);
             }
+            filter.clear();
         }
 
         if (word == endWord)
