@@ -77,7 +77,7 @@ int main()
         {
             if (sparseMatrix[i][j] != 0)
                 insert(root, i, j,
-                       sparseMatrix[i][j]);
+                    sparseMatrix[i][j]);
         }
     }
     printList(root);
