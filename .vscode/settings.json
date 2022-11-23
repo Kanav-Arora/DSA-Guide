@@ -85,7 +85,10 @@
         "unordered_set": "cpp",
         "variant": "cpp",
         "regex": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "list": "cpp",
+        "span": "cpp",
+        "ranges": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }
