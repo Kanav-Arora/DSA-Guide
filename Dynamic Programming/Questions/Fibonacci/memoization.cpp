@@ -22,3 +22,5 @@ int main()
     cout<<fib(n);
     return 0;
 }
+
+// T.C : O(N) and S.C : O(N) + O(N)
