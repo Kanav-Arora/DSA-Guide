@@ -45,3 +45,6 @@ try.cpp
 try.c
 .DS_Store
 try_1.cpp
+output.txt
+error.txt
+input.txt
