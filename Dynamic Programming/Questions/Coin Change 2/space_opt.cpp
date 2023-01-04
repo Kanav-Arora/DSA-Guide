@@ -23,6 +23,7 @@ long countWaysToMakeChange(int *denominations, int n, int value)
                 pick = curr[val - denominations[ind]];
             curr[val] = notpick + pick;
         }
+        prev = curr;
     }
 
     return curr[value];
