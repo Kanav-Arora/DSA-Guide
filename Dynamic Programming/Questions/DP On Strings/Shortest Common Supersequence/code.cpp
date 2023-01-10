@@ -60,6 +60,6 @@ int main()
 {
     string s = "brute";
     string t = "groot";
-    cout << lcs(s, t) << endl;
+    cout << shortestSupersequence(s, t) << endl;
     return 0;
 }
