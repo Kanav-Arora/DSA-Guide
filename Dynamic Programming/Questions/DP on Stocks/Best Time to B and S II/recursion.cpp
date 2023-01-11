@@ -1,37 +1,41 @@
-#include<iostream>
+#include <iostream>
+#include <vector>
 using namespace std;
 
-long solver(long* v,int n,int index, bool buy)
+class Solution
 {
-    if(index==n)
+public:
+    int solver(vector<int> &p, int ind, bool av)
     {
-        return 0;
-    }
-    long profit = 0;
-    if(buy)
-    {
-        long take = -v[index] + solver(v,n,index+1,0);
-        long nottake = 0 + solver(v,n,index+1,1);
-        
-        profit =  max(take,nottake);
-    }
-    else
-    {
-        long sell = v[index] + solver(v,n,index+1,1);
-        long notsell = 0 + solver(v,n,index+1,0);
-        
-        profit = max(sell,notsell);
-    }
-    return profit;
-}
+        if (ind == p.size())
+            return 0;
 
-long getMaximumProfit(long *values, int n)
-{   
-    return solver(values,n,0,1);
-}
+        int val = 0;
+        if (av)
+        {
+            int notsell = solver(p, ind + 1, true);
+            int sell = p[ind] + solver(p, ind + 1, false);
+
+            val = max(val, max(notsell, sell));
+        }
+        else
+        {
+            int notbuy = solver(p, ind + 1, false);
+            int buy = -p[ind] + solver(p, ind + 1, true);
+
+            val = max(val, max(notbuy, buy));
+        }
+        return val;
+    }
+
+    int maxProfit(vector<int> &prices)
+    {
+        return solver(prices, 0, false);
+    }
+};
 
 int main()
 {
-    
+
     return 0;
 }

@@ -2,39 +2,41 @@
 #include <vector>
 using namespace std;
 
-long solver(long *v, int n, vector<vector<long>> &dp, int index, bool buy)
+class Solution
 {
-    if (index == n)
+public:
+    int solver(vector<int> &p, int ind, bool av, vector<vector<int>> &dp)
     {
-        return 0;
+        if (ind == p.size())
+            return 0;
+
+        if (dp[ind][av] != -1)
+            return dp[ind][av];
+
+        int val = 0;
+        if (av)
+        {
+            int notsell = solver(p, ind + 1, true, dp);
+            int sell = p[ind] + solver(p, ind + 1, false, dp);
+
+            val = max(val, max(notsell, sell));
+        }
+        else
+        {
+            int notbuy = solver(p, ind + 1, false, dp);
+            int buy = -p[ind] + solver(p, ind + 1, true, dp);
+
+            val = max(val, max(notbuy, buy));
+        }
+        return dp[ind][av] = val;
     }
 
-    if (dp[index][buy] != -1)
-        return dp[index][buy];
-
-    long profit = 0;
-    if (buy)
+    int maxProfit(vector<int> &prices)
     {
-        long take = -v[index] + solver(v, n, dp, index + 1, 0);
-        long nottake = 0 + solver(v, n, dp, index + 1, 1);
-
-        profit = max(take, nottake);
+        vector<vector<int>> dp(prices.size(), vector<int>(2, -1));
+        return solver(prices, 0, false, dp);
     }
-    else
-    {
-        long sell = v[index] + solver(v, n, dp, index + 1, 1);
-        long notsell = 0 + solver(v, n, dp, index + 1, 0);
-
-        profit = max(sell, notsell);
-    }
-    return dp[index][buy] = profit;
-}
-
-long getMaximumProfit(long *values, int n)
-{
-    vector<vector<long>> dp(n, vector<long>(2, -1));
-    return solver(values, n, dp, 0, 1);
-}
+};
 
 int main()
 {
