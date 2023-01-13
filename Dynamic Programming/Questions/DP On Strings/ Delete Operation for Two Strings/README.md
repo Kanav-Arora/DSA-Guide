@@ -1,0 +1,1 @@
+[Link to the question](https://leetcode.com/problems/delete-operation-for-two-strings/description/)
