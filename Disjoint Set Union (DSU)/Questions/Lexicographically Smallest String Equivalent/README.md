@@ -1,0 +1,1 @@
+[Link to the question - Leetcode](https://leetcode.com/problems/lexicographically-smallest-equivalent-string/description/)
