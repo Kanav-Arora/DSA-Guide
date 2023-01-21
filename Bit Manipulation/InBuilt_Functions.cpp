@@ -9,6 +9,8 @@ int main()
 {
     cout << __builtin_clz(5) << endl; // count no of zero bits at the beginning of a number
 
+    // use __builtin_clzl for long int and __builtin_clzll for long long and same for other functions
+
     cout << __builtin_ctz(5) << endl; // count no of zero bits at the end of a number
 
     cout << __builtin_popcount(5) << endl; // number of 1's in bit
