@@ -1,35 +1,35 @@
-#include<iostream>
-#include<vector>
-#include<queue>
+#include <iostream>
+#include <vector>
+#include <queue>
 using namespace std;
 
-float MaxProfit(vector<int> profits, vector<int> weights,int n, int m)
+float MaxProfit(vector<int> profits, vector<int> weights, int n, int m)
 {
-    priority_queue<pair<float,int>> q;
+    priority_queue<pair<float, int>> q;
 
-    for(int i=0; i<n; i++)
+    for (int i = 0; i < n; i++)
     {
-        q.push({(float)profits[i]/weights[i],i});
+        q.push({(float)profits[i] / weights[i], i});
     }
 
     float val = 0;
-    int wt =0;
+    int wt = 0;
 
-    while(!q.empty() && wt<m)
+    while (!q.empty() && wt < m)
     {
-        pair<float,int> pair = q.top();
+        pair<float, int> pair = q.top();
         q.pop();
 
-        if(wt+ weights[pair.second] <=m)
+        if (wt + weights[pair.second] <= m)
         {
-            wt+=weights[pair.second];
-            val+=profits[pair.second];
+            wt += weights[pair.second];
+            val += profits[pair.second];
         }
         else
         {
             float req = m - wt;
-            cout<<req * (float(profits[pair.second]/weights[pair.second]))<<endl;
-            val+= req * (float(profits[pair.second]/weights[pair.second]));
+            cout << req * (float(profits[pair.second] / weights[pair.second])) << endl;
+            val += req * (float(profits[pair.second] / weights[pair.second]));
             wt = m;
         }
     }
@@ -39,23 +39,22 @@ float MaxProfit(vector<int> profits, vector<int> weights,int n, int m)
 
 int main()
 {
-    int n,m;
-    cin>>n>>m;
-    vector<int> profits,weights;
+    int n, m;
+    cin >> n >> m;
+    vector<int> profits, weights;
 
-    for(int i=0; i<n; i++)
+    for (int i = 0; i < n; i++)
     {
-        int p,wt;
-        cin>>p>>wt;
+        int p, wt;
+        cin >> p >> wt;
 
         profits.push_back(p);
         weights.push_back(wt);
     }
 
-    cout<<MaxProfit(profits,weights,n,m)<<endl;
+    cout << MaxProfit(profits, weights, n, m) << endl;
     return 0;
 }
-
 
 /*
 
@@ -63,7 +62,7 @@ int main()
 10 2
 5 3
 15 5
-7 7 
+7 7
 6 1
 18 4
 3 1

@@ -18,11 +18,10 @@ int solver(vector<int> weight, vector<int> value, int ind, int wt)
 
 int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight)
 {
-    ret
+}
 
-        int
-        main()
-    {
+int main()
+{
 
-        return 0;
-    }
+    return 0;
+}
