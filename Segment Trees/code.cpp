@@ -24,7 +24,7 @@ int query(int node, int low, int high, int l, int r)
         return seg[node];
 
     if (l > high || r < low) // if query does not lie in current call range
-        return INT_MIN;
+        return -1e9;
 
     int mid = low + (high - low) / 2;
     int lt = query(2 * node + 1, low, mid, l, r);      // query on left subhalf
