@@ -1,12 +1,14 @@
 #include<iostream>
 #include<climits>
+#include<algorithm>
 using namespace std;
 
 int main()
 {
     int n;
     cin>>n;
-    int arr[n];
+    // must have a constant
+    int arr[50];
     for(int i=0; i<n; i++)
     {
         int num;
@@ -29,6 +31,9 @@ int main()
     }
 
     cout<<mini<<endl;
-
+    // .Another approach using iterator
+    // this return an iterator so use a pointer
+    int minElement=*std::min_element(arr,arr+n);
+    cout<<minElement<<endl;
     return 0;
 }
