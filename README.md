@@ -1,10 +1,16 @@
-# DSA-Cpp
+# DSA-Guide
 
 [![wakatime](https://wakatime.com/badge/github/Kanav-Arora/DSA-Guide.svg)](https://wakatime.com/badge/github/Kanav-Arora/DSA-Guide)
 ![](https://img.shields.io/tokei/lines/github/Kanav-Arora/DSA-Guide)
 ![](https://img.shields.io/github/languages/top/Kanav-Arora/DSA-Guide)
 
-Contributors are invited to improve the content, add new problems to it.
+**DSA-Guide** is a comprehensive collection of solutions to various Data Structures and Algorithms (DSA) problems. It aims to help learners and practitioners understand key concepts and improve their problem-solving skills. Contributions are welcome to improve the content and expand the repository with more problems and solutions.
+
+# Contributors
+
+- [shubhamk90](https://github.com/shubhamk90)
+
+# Index
 
 ## Arrays
 
@@ -174,4 +180,5 @@ Contributors are invited to improve the content, add new problems to it.
     #### Level Order Traversal
 - [Bottom to Top.cpp](./Binary%20Tree/Traversals%20of%20Binary%20Tree/Level%20Order%20Traversal/Bottom_to_Top.cpp)
 - [Top to Bottom.cpp](./Binary%20Tree/Traversals%20of%20Binary%20Tree/Level%20Order%20Traversal/Top_to_Bottom.cpp)
+
 
