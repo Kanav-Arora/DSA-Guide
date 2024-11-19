@@ -6,6 +6,8 @@
 
 **DSA-Guide** is a comprehensive collection of solutions to various Data Structures and Algorithms (DSA) problems. It aims to help learners and practitioners understand key concepts and improve their problem-solving skills. Contributions are welcome to improve the content and expand the repository with more problems and solutions.
 
+**Explore the [Competitive Programming Template](./COMPETITIVE_TEMPLATE.cpp)** 🚀 for a ready-to-use code structure that simplifies and speeds up solving problems in contests. ✨
+
 # Contributors
 
 - [shubhamk90](https://github.com/shubhamk90)
@@ -14,8 +16,8 @@
 
 ## Arrays
 
-- [Array](./array.cpp)
-- [Character Arrays](./character_arrays.cpp)
+- [Array](./Arrays/array.cpp)
+- [Character Arrays](./Arrays/character_arrays.cpp)
 
     ##### 2D Matrix Multiplication
 
