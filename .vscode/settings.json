@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.ejs": "html",
         "iostream": "cpp",
         "__bit_reference": "cpp",
         "__bits": "cpp",
@@ -91,7 +92,11 @@
         "ranges": "cpp",
         "forward_list": "cpp",
         "filesystem": "cpp",
-        "any": "cpp"
+        "any": "cpp",
+        "__verbose_abort": "cpp",
+        "charconv": "cpp",
+        "format": "cpp",
+        "text_encoding": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled",
     "C_Cpp.default.compilerPath": "/usr/bin/clang++"
