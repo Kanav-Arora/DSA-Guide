@@ -6,8 +6,9 @@ using namespace std;
 string postfixToInfix(string s)
 {
     stack<string> st;
-    for (auto each : s)
+    for (int i = s.length() - 1; i >= 0; i--)
     {
+        char each = s[i];
         if ((int(each) >= 48 && int(each) <= 57) || (int(each) >= 65 && int(each) <= 90) || (int(each) >= 97 && int(each) <= 122))
         {
             string s;
@@ -19,7 +20,7 @@ string postfixToInfix(string s)
             st.pop();
             string c2 = st.top();
             st.pop();
-            string exp = "(" + c2 + each + c1 + ")"; // In this we'll do c2 <operation> c1
+            string exp = "(" + c1 + each + c2 + ")"; // In this we'll do c1 <operation> c2
             st.push(exp);
         }
     }
@@ -28,6 +29,6 @@ string postfixToInfix(string s)
 
 int main()
 {
-    cout << postfixToInfix("AB-DE+F*/") << endl; // Output: ((A-B)/((D+E)*F))
+    cout << postfixToInfix("*+PQ-MN") << endl; // Output: ((P+Q)*(M-N))
     return 0;
 }
