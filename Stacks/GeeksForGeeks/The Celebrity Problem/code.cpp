@@ -22,7 +22,7 @@ public:
             st.pop();
             if (mat[a][b] == 1)
                 st.push(b);
-            else
+            else if (mat[b][a] == 1)
                 st.push(a);
         }
         if (st.empty())
