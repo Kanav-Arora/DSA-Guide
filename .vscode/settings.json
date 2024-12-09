@@ -96,7 +96,9 @@
         "__verbose_abort": "cpp",
         "charconv": "cpp",
         "format": "cpp",
-        "text_encoding": "cpp"
+        "text_encoding": "cpp",
+        "print": "cpp",
+        "cinttypes": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled",
     "C_Cpp.default.compilerPath": "/usr/bin/clang++"
